@@ -1,0 +1,63 @@
+/* src/App.css */
+
+body {
+  font-family: Helvetica;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+button {
+  background: none;
+}
+.primary-button{
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button {
+  background-color: #d65562;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button:hover {
+  background-color: #ff2200;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #007bff;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+  text-align: center;
+  max-width: 600px;
+}
