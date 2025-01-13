@@ -7,6 +7,20 @@ Content-Type: application/json
 }
 ###
 
+GET https://fullstackphonebookapp.fly.dev/api/persons
+
+###
+
+POST https://fullstackphonebookapp.fly.dev/api/persons
+Content-Type: application/json
+
+{
+    "name": "Amanda E",
+    "number": "1234567890"
+}
+
+###
+
 POST http://localhost:3002/api/persons
 Content-Type: application/json
 
