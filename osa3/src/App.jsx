@@ -18,6 +18,11 @@ const PhonebookForm = ({ newName, setNewName, newNumber, setNewNumber, handleSub
   return (
     <form onSubmit={handleSubmit}>
       <div>
+        <ul>
+          <li>Name must be at least 3 characters long.</li>
+          <li>Number must have at least 8 characters.</li>
+          <li>Number format: 2 or 3 digits, a hyphen, and then more digits (e.g., 09-123456 or 040-12345678).</li>
+        </ul>
         name: <input value={newName} onChange={(event) => setNewName(event.target.value)} />
         <div>
           number: <input value={newNumber} onChange={(event) => setNewNumber(event.target.value)} />
@@ -93,26 +98,35 @@ const App = () => {
           })
           .catch((error) => {
             console.error('Error updating person:', error);
-            if (error.response && error.response.status === 404) {
-              setNotificationType('error');
+            setNotificationType('error');
+
+            if (error.response && error.response.status === 400) {
+              setNotification(error.response.data.error);
+            } else if (error.response && error.response.status === 404) {
               setNotification(`Error: ${newPerson.name} was already deleted from the server.`);
+              setPersons(persons.filter(p => p.id !== existingPerson.id));
+            } else {
+              setNotification('An unexpected error occurred');
             }
+
             setTimeout(() => setNotification(''), 5000);
           });
       }
     } else {
       connection.addPerson(newPerson)
         .then((response) => {
-          console.log('New person added:', response.data);
           setPersons([...persons, response.data]);
           setNotificationType('success');
           setNotification(`Added ${newPerson.name}`);
           setTimeout(() => setNotification(''), 5000);
         })
         .catch((error) => {
-          console.error('Error adding new person:', error);
+          const backendErrorMessage = error.response.data.error;
+          
           setNotificationType('error');
-          setNotification('Error adding the person. Please try again.');
+          setNotification(backendErrorMessage || 'Error adding the person.');
+          
+          console.error('Error adding:', backendErrorMessage);
           setTimeout(() => setNotification(''), 5000);
         });
     }
@@ -142,6 +156,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Notification message={notification} type={notificationType} />
       <PhonebookForm
+      
         newName={newName}
         setNewName={setNewName}
         newNumber={newNumber}
