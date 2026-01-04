@@ -28,7 +28,7 @@ if (name && number) {
 } else {
 
   Person.find({}).then((result) => {
-    console.log('Phonebook:');
+    console.log('PHONEBOOK:');
     result.forEach((person) => {
       console.log(`${person.name} ${person.number}`);
     });
