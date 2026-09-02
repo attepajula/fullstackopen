@@ -34,7 +34,7 @@ describe('creating a new user', () => {
     assert.strictEqual(usersAfter.length, usersAtStart.length + 1)
 
     const usernames = usersAfter.map(u => u.username)
-    assert.ok(usernames.includes('mluukkai'))
+    assert.ok(usernames.includes('keksi'))
   })
 
   test('fails with 400 if username already taken', async () => {
